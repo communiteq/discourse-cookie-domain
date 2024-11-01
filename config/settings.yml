@@ -1,0 +1,5 @@
+plugins:
+  cookie_domain_enabled:
+    default: false
+  cookie_domain_domain:
+    default: ""

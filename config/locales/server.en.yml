@@ -1,0 +1,4 @@
+en:
+  site_settings:
+    cookie_domain_enabled: "Enable cookie domain plugin."
+    cookie_domain_domain: "The domain to use for the session cookie. Leave empty to disable. WARNING: changing this value could invalidate all existing sessions."

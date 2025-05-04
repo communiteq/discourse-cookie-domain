@@ -2,7 +2,7 @@
 
 # name: discourse-cookie-domain
 # about: Change the cookie domain
-# version: 1.0
+# version: 1.0.1
 # authors: Communiteq
 # url: TODO
 
@@ -14,6 +14,13 @@ end
 
 after_initialize do
   module DiscourseCookieDomain::DefaultCurrentUserProviderExtension
+    def log_off_user(session, cookie_jar)
+      if SiteSetting.cookie_domain_enabled && !SiteSetting.cookie_domain_domain.empty?
+        cookie_jar.delete(Auth::DefaultCurrentUserProvider::TOKEN_COOKIE, { domain: SiteSetting.cookie_domain_domain })
+      end
+      super
+    end
+
     def set_auth_cookie!(unhashed_auth_token, user, cookie_jar)
       data = {
         token: unhashed_auth_token,

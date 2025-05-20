@@ -3,3 +3,6 @@ plugins:
     default: false
   cookie_domain_domain:
     default: ""
+  cookie_domain_remove_cookies_on_logout:
+    type: list
+    default: ""

@@ -2,7 +2,7 @@
 
 # name: discourse-cookie-domain
 # about: Change the cookie domain
-# version: 1.0.1
+# version: 1.1
 # authors: Communiteq
 # url: TODO
 
@@ -17,6 +17,9 @@ after_initialize do
     def log_off_user(session, cookie_jar)
       if SiteSetting.cookie_domain_enabled && !SiteSetting.cookie_domain_domain.empty?
         cookie_jar.delete(Auth::DefaultCurrentUserProvider::TOKEN_COOKIE, { domain: SiteSetting.cookie_domain_domain })
+        SiteSetting.cookie_domain_remove_cookies_on_logout.split('|').each do |c|
+          cookie_jar.delete(c, { domain: SiteSetting.cookie_domain_domain })
+        end
       end
       super
     end
